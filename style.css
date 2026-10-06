@@ -1,0 +1,140 @@
+/* ==================================================================
+   YOUR SITE'S LOOK  (edit this file, save it, then run build)
+   - Change only the values after the colon, e.g.  --accent: #0b6e6a;
+   - Keep the semicolon ; at the end of every line.
+   - Colours are defined ONCE in the two blocks below; the rest of the
+     file uses them. Change a colour here and it changes everywhere.
+   - Colours are written as codes like #0b6e6a. Search "color picker"
+     in Google to pick a colour and copy its code.
+   ================================================================== */
+
+/* ---------- COLOURS (normal / light mode) ---------- */
+:root {
+  --ink: #16202a;        /* main text colour */
+  --muted: #5b6770;      /* grey text (taglines, card descriptions) */
+  --line: #d9e0e4;       /* thin borders and divider lines */
+  --bg: #6469a83b;         /* page background */
+  --card: #ffffff;       /* background of cards and tab buttons */
+  --accent: #0b6e6a;     /* buttons, links and highlights (the green) */
+  --accent-ink: #ffffff; /* text colour on top of the accent colour */
+  --note: #fff4d6;       /* background of the yellow affiliate note */
+}
+
+/* ---------- COLOURS (dark mode) ----------
+   Shown only to visitors whose phone or computer is set to dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8eef1;
+    --muted: #9fb0b9;
+    --line: #2a3640;
+    --bg: #10171c;
+    --card: #151f26;
+    --accent: #3ec1b9;
+    --accent-ink: #06201e;
+    --note: #2d2610;
+  }
+}
+
+/* ---------- BASIC TEXT ----------
+   17px is the size of normal text. Make it bigger or smaller if you like.
+   The font list says: use the first one the visitor's device has. */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+a { color: var(--accent); }
+
+/* ---------- PAGE WIDTH ----------
+   max-width is how wide the content column can be. */
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- TOP BAR (site name + menu) ---------- */
+header.site { border-bottom: 1px solid var(--line); padding: 14px 0; }
+header.site .wrap {
+  display: flex; flex-wrap: wrap; gap: 12px 28px;
+  align-items: baseline; justify-content: space-between;
+}
+header.site .brand {
+  font-weight: 600; font-size: 1.15rem;
+  color: var(--ink); text-decoration: none;
+}
+nav a { margin-right: 18px; color: var(--ink); text-decoration: none; }
+nav a:hover, nav a:focus-visible { text-decoration: underline; }
+
+/* ---------- HEADINGS ----------
+   rem means "times the normal text size": 2rem = twice as big. */
+h1 { font-size: 2rem; line-height: 1.2; margin: 2rem 0 .5rem; }  /* page title */
+h2 { font-size: 1.3rem; margin: 2rem 0 .5rem; }                  /* section headings */
+.lead { color: var(--muted); font-size: 1.1rem; max-width: 60ch; } /* grey line under the title */
+
+/* ---------- HOME PAGE CARDS ---------- */
+.grid {
+  display: grid; gap: 16px; margin: 1.5rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 250px = smallest card width */
+}
+.card {
+  position: relative; cursor: pointer;
+  border: 1px solid var(--line); background: var(--card);
+  border-radius: 10px;   /* corner roundness */
+  padding: 18px;         /* space inside the card */
+  transition: border-color .15s;
+}
+.card:hover { border-color: var(--accent); }
+.card:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card a.stretch { color: inherit; text-decoration: none; }
+/* the next rule makes the WHOLE card clickable. Leave it as it is. */
+.card a.stretch::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+.card h3 { margin: 0 0 .25rem; font-size: 1.15rem; }
+.card p { margin: .25rem 0 .75rem; color: var(--muted); }
+
+/* ---------- TABS (Overview | Data Analytics | ...) ---------- */
+.tabs {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 1.25rem 0 1rem; padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.tabs a {
+  margin: 0; padding: 8px 14px;
+  border: 1px solid var(--line); border-radius: 999px; /* 999px = fully rounded */
+  text-decoration: none; color: var(--ink);
+  background: var(--card); font-size: .95rem;
+}
+.tabs a:hover, .tabs a:focus-visible { border-color: var(--accent); }
+/* the tab for the page you are on */
+.tabs a[aria-current=page] {
+  background: var(--accent); color: var(--accent-ink);
+  border-color: var(--accent); font-weight: 600;
+}
+
+/* ---------- BUTTONS ("Visit 10Alytics") ---------- */
+.btn {
+  display: inline-block; background: var(--accent); color: var(--accent-ink);
+  padding: 10px 18px; border-radius: 6px;
+  text-decoration: none; font-weight: 600;
+}
+.btn:hover, .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ---------- YELLOW AFFILIATE NOTE ---------- */
+.note {
+  background: var(--note); border-radius: 6px;
+  padding: 10px 14px; font-size: .92rem; margin: 1.25rem 0;
+}
+
+/* ---------- PROS / CONS COLUMNS ---------- */
+.cols { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+
+/* ---------- SMALL SCREENS (phones) ---------- */
+@media (max-width: 600px) {
+  .cols { grid-template-columns: 1fr; }  /* stack pros and cons */
+  h1 { font-size: 1.6rem; }
+}
+
+/* ---------- FOOTER AND TEXT WIDTH ---------- */
+footer.site {
+  border-top: 1px solid var(--line); margin-top: 3rem;
+  padding: 20px 0; color: var(--muted); font-size: .9rem;
+}
+p, li { max-width: 70ch; }  /* keeps long lines easy to read */
